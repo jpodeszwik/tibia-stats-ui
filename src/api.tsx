@@ -1,6 +1,6 @@
 export const fetchGuildNames = async (): Promise<Array<string>> => {
   const res = await fetch(
-    "https://uprq01nd77.execute-api.eu-central-1.amazonaws.com/guildNames"
+    "/api/guildNames"
   );
   return await res.json();
 };
@@ -16,7 +16,7 @@ export const fetchGuildMembersHistory = async (
   guildName: string
 ): Promise<Array<GuildMemberHistoryRecord>> => {
   const res = await fetch(
-    `https://uprq01nd77.execute-api.eu-central-1.amazonaws.com/guildMembersHistory/${guildName}`
+    `/api/guildMembersHistory/${guildName}`
   );
   return await res.json();
 };
