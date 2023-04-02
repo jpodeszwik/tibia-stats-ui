@@ -9,17 +9,20 @@ type SearchGuildProps = {
 
 const SearchGuild = ({ guild }: SearchGuildProps) => {
   const [options, setOptions] = useState<Array<String>>([]);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
     fetchGuildNames()
-      .then(setOptions);
+      .then(setOptions)
+      .finally(() => setLoading(false));
   }, []);
 
   return (
     <Autocomplete
       options={options}
       defaultValue={guild}
+      loading={loading}
       onChange={(_evt, value) => value && navigate(`/guild/${value}`)}
       style={{ width: 400 }}
       renderInput={(params) => (

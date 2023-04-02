@@ -3,11 +3,11 @@ import { useParams } from "react-router";
 import SearchGuild from "./SearchGuild";
 import styled from "styled-components";
 import { GuildMemberHistoryRecord, fetchGuildMembersHistory } from "./api";
+import { Skeleton } from "@mui/material";
 
 const GuildWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 20px;
 
   .history {
@@ -46,21 +46,29 @@ const PlayerRecord = ({ record }: PlayerRecordProps) => {
 const Guild = () => {
   const { guildName } = useParams();
   const [history, setHistory] = useState<Array<GuildMemberHistoryRecord>>([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (guildName) {
-      fetchGuildMembersHistory(guildName).then(setHistory);
+      setLoading(true);
+      fetchGuildMembersHistory(guildName)
+        .then(setHistory)
+        .finally(() => setLoading(false));
     }
   }, [guildName]);
 
   return (
     <GuildWrapper>
       <SearchGuild guild={guildName} />
-      <div className="history">
-        {history.map((h) => (
-          <PlayerRecord record={h} />
-        ))}
-      </div>
+      {loading ? (
+        <Skeleton variant="rectangular" width={400} height={500} />
+      ) : (
+        <div className="history">
+          {history.map((h) => (
+            <PlayerRecord key={`${h.date}${h.playerName}`} record={h} />
+          ))}
+        </div>
+      )}
     </GuildWrapper>
   );
 };
