@@ -3,13 +3,12 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Guild from "./Guild";
 import "./index.css";
-import SearchGuild from "./SearchGuild";
-import Layout from "./Layout";
+import Root from "./Root";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <SearchGuild />,
+    element: <Root />,
   },
   {
     path: "/guild/:guildName",
@@ -19,8 +18,6 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <Layout>
-      <RouterProvider router={router} />
-    </Layout>
+    <RouterProvider router={router} />
   </React.StrictMode>
 );

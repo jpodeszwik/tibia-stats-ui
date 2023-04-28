@@ -1,20 +1,13 @@
 import { ReactElement } from "react";
 import styled from "styled-components";
+import SearchGuild from "./SearchGuild";
+import { useParams } from "react-router";
 
 const LayoutWrapper = styled.div`
-  .banner {
-    display: flex;
-    justify-content: center;
-    background-color: #282c34;
-    color: #fff;
-  }
-
-  .content {
-    padding: 16px;
-    display: flex;
-    justify-content: center;
-    width: 100%;
-  }
+  padding: 16px;
+  dislay: flex;
+  flex-direction: column;
+  gap: 16px
 `;
 
 type LayoutProps = {
@@ -22,12 +15,11 @@ type LayoutProps = {
 };
 
 const Layout = ({ children }: LayoutProps) => {
+  const { guildName } = useParams();
   return (
     <LayoutWrapper>
-      <div className="banner">
-        <h1>Tibia Stats</h1>
-      </div>
-      <div className="content">{children}</div>
+      <SearchGuild guild={guildName} />
+      <div>{children}</div>
     </LayoutWrapper>
   );
 };

@@ -2,6 +2,13 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { GuildMemberHistoryRecord, fetchGuildMembersHistory } from "./api";
 import { Skeleton } from "@mui/material";
+import styled from "styled-components";
+
+const History = styled.div`
+  display: flex;
+  gap: 5px;
+  flex-direction: column;
+`;
 
 type ActionProps = {
   action: string;
@@ -48,11 +55,11 @@ const Activity = () => {
       {loading ? (
         <Skeleton variant="rectangular" width={400} height={500} />
       ) : (
-        <div className="history">
+        <History>
           {history.map((h) => (
             <PlayerRecord key={`${h.date}${h.playerName}`} record={h} />
           ))}
-        </div>
+        </History>
       )}
     </div>
   );
