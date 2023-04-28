@@ -2,6 +2,7 @@ import { TextField, Autocomplete } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { fetchGuildNames } from "./api";
+import styled from "styled-components";
 
 type SearchGuildProps = {
   guild?: string;

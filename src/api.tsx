@@ -20,3 +20,18 @@ export const fetchGuildMembersHistory = async (
   );
   return await res.json();
 };
+
+export type GuildDeathHistoryRecord = {
+  characterName: string;
+  time: string;
+  reason: string;
+};
+
+export const fetchGuildDeathHistory = async (
+  guildName: string
+): Promise<Array<GuildDeathHistoryRecord>> => {
+  const res = await fetch(
+    `/api/guildDeaths/${guildName}`
+  );
+  return await res.json();
+};
