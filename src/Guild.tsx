@@ -1,9 +1,7 @@
-import { useState } from "react";
 import styled from "styled-components";
 import { Tab, Tabs } from "@mui/material";
-import Deaths from "./Deaths";
-import Activity from "./Activity";
 import Layout from "./Layout";
+import { Outlet, useMatch, useNavigate, useParams } from "react-router-dom";
 
 const GuildWrapper = styled.div`
   display: flex;
@@ -13,10 +11,12 @@ const GuildWrapper = styled.div`
 `;
 
 const Guild = () => {
-  const [value, setValue] = useState(0);
+  const { guildName } = useParams();
+  const navigate = useNavigate();
+  const match = useMatch("guild/:guildName/:tab");
 
-  const handleChange = (_: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
+  const handleChange = (_: React.SyntheticEvent, newValue: String) => {
+    navigate(`/guild/${guildName}/${newValue}`)
   };
 
   return (
@@ -24,19 +24,16 @@ const Guild = () => {
       <GuildWrapper>
         <div className="navigation">
           <Tabs
-            value={value}
+            value={match?.params?.tab || 'deaths'}
             onChange={handleChange}
             aria-label="basic tabs example"
           >
-            <Tab label="Activity" />
-            <Tab label="Deaths" />
+            <Tab label="Deaths" value={"deaths"} />
+            <Tab label="Activity" value={"activity"} />
           </Tabs>
         </div>
 
-        <div className="guild-content">
-          {value === 0 && <Activity />}
-          {value === 1 && <Deaths />}
-        </div>
+        <Outlet />
       </GuildWrapper>
     </Layout>
   );
