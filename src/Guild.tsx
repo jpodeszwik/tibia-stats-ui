@@ -16,7 +16,7 @@ const Guild = () => {
   const match = useMatch("guild/:guildName/:tab");
 
   const handleChange = (_: React.SyntheticEvent, newValue: String) => {
-    navigate(`/guild/${guildName}/${newValue}`)
+    navigate(`/guild/${guildName}/${newValue}`);
   };
 
   return (
@@ -24,12 +24,13 @@ const Guild = () => {
       <GuildWrapper>
         <div className="navigation">
           <Tabs
-            value={match?.params?.tab || 'deaths'}
+            value={match?.params?.tab || "deaths"}
             onChange={handleChange}
             aria-label="basic tabs example"
           >
             <Tab label="Deaths" value={"deaths"} />
             <Tab label="Activity" value={"activity"} />
+            <Tab label="Experience" value={"experience"} />
           </Tabs>
         </div>
 

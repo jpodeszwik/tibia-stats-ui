@@ -6,6 +6,7 @@ import "./index.css";
 import Root from "./Root";
 import Deaths from "./Deaths";
 import Activity from "./Activity";
+import Experience from "./Experience";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
@@ -15,6 +16,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
         <Route path="/guild/:guildName" element={<Guild />}>
           <Route path="deaths" element={<Deaths />} />
           <Route path="activity" element={<Activity />} />
+          <Route path="experience" element={<Experience />} />
           <Route index element={<Navigate to="deaths" replace />} />
         </Route>
       </Routes>
