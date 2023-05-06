@@ -33,6 +33,7 @@ export const fetchGuildDeathHistory = async (
 export type GuildExpHistoryRecord = {
   date: string;
   exp: number;
+  gainedExp: number;
 };
 
 export const fetchGuilExperienceHistory = async (
